@@ -152,6 +152,19 @@ class Csv
     ): int;
 
     /**
+     * Convert the CSV to a string
+     * @param bool $hasHeader default is true
+     * @param string $separator default is ';'
+     * @param string $quoteChar default is '"'
+     * @return string
+     */
+    public function ToString(
+        bool $hasHeader = true,
+        string $separator = Csv::SEPARATOR,
+        string $quoteChar = Csv::QUOTE_CHAR
+    ): string;
+
+    /**
      * Helper function, quote a string with a quoteChar
      * @param string $value
      * @param string $quoteChar default is double quote
