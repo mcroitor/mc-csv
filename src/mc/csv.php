@@ -281,7 +281,12 @@ class Csv
     ): int {
         $this->data = [];
 
-        $lines = explode("\n", $csvString);
+        $lines = explode(PHP_EOL, $csvString);
+        // remove all empty lines
+        $lines = array_filter($lines, function ($line) {
+            return !empty($line);
+        });
+
         $firstRow = str_getcsv($lines[0], $separator, $quoteChar);
         if ($hasHeader) {
             $this->header = $firstRow;
@@ -296,6 +301,32 @@ class Csv
             $this->data[] = array_combine($this->header, $row);
         }
         return self::CSV_OK;
+    }
+
+    /**
+     * Convert the CSV to a string
+     * @param bool $hasHeader default is true
+     * @param string $separator default is ';'
+     * @param string $quoteChar default is '"'
+     * @return string
+     */
+    public function ToString(
+        bool $hasHeader = true,
+        string $separator = Csv::SEPARATOR,
+        string $quoteChar = Csv::QUOTE_CHAR
+    ): string {
+        $result = '';
+        if ($hasHeader) {
+            $result .= implode($separator, array_map(function ($value) use ($quoteChar) {
+                return Csv::Quote($value, $quoteChar);
+            }, $this->header)) . PHP_EOL;
+        }
+        foreach ($this->data as $row) {
+            $result .= implode($separator, array_map(function ($value) use ($quoteChar) {
+                return Csv::Quote($value, $quoteChar);
+            }, $row)) . PHP_EOL;
+        }
+        return $result;
     }
 
     /**
