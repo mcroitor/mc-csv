@@ -1,6 +1,6 @@
 <?php
 
-namespace mc;
+namespace Mc;
 
 class Csv
 {

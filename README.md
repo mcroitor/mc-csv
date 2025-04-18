@@ -1,11 +1,11 @@
-# \mc\csv
+# \Mc\Csv
 
 Simple PHP class for work with CSV files.
 
 ## interface
 
 ```php
-namespace mc;
+namespace Mc;
 
 class Csv
 {
@@ -187,7 +187,7 @@ class Csv
 Create a CSV instance from an array of arrays and save it into a file.
 
 ```php
-use mc\Csv;
+use Mc\Csv;
 
 // Create a CSV instance
 $csv = new Csv([
@@ -204,7 +204,7 @@ $csv->Save('data.csv');
 Another example of CSV instance initialization.
 
 ```php
-use mc\Csv;
+use Mc\Csv;
 
 // Create a CSV instance
 $csv = new Csv([
@@ -220,7 +220,7 @@ $csv->Save('data.csv');
 Load a CSV from a file.
 
 ```php
-use mc\Csv;
+use Mc\Csv;
 
 $csv = new Csv();
 
@@ -237,7 +237,7 @@ print_r($csv->GetData());
 Load a CSV from a string.
 
 ```php
-use mc\Csv;
+use Mc\Csv;
 
 $csv = new Csv();
 
