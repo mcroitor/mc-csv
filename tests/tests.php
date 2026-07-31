@@ -4,7 +4,7 @@ function test_create_csv()
 {
     info("Creating a new CSV instance");
     $csv = new \Mc\Csv([]);
-    test($csv instanceof \mc\Csv);
+    test($csv instanceof \Mc\Csv);
 }
 
 function test_csv_header()
@@ -13,7 +13,7 @@ function test_csv_header()
     $csv = new \Mc\Csv([
         ['a' => 1, 'b' => 2, 'c' => 3]
     ]);
-    test($csv->GetHeader() === ['a', 'b', 'c']);
+    test($csv->getHeader() === ['a', 'b', 'c']);
 }
 
 function test_csv_data1()
@@ -22,7 +22,7 @@ function test_csv_data1()
     $csv = new \Mc\Csv([
         ['a' => 1, 'b' => 2, 'c' => 3]
     ]);
-    test($csv->GetData() === [['a' => 1, 'b' => 2, 'c' => 3]]);
+    test($csv->getData() === [['a' => 1, 'b' => 2, 'c' => 3]]);
 }
 
 function test_csv_data2()
@@ -32,7 +32,7 @@ function test_csv_data2()
         ['a', 'b', 'c'],
         [1, 2, 3]
     ]);
-    test($csv->GetData() === [['a' => 1, 'b' => 2, 'c' => 3]]);
+    test($csv->getData() === [['a' => 1, 'b' => 2, 'c' => 3]]);
 }
 
 function test_csv_total_rows()
@@ -42,7 +42,7 @@ function test_csv_total_rows()
         ['a' => 1, 'b' => 2, 'c' => 3],
         ['a' => 4, 'b' => 5, 'c' => 6]
     ]);
-    test($csv->TotalRows() === 2);
+    test($csv->totalRows() === 2);
 }
 
 function test_csv_get_row()
@@ -52,8 +52,8 @@ function test_csv_get_row()
         ['a' => 1, 'b' => 2, 'c' => 3],
         ['a' => 4, 'b' => 5, 'c' => 6]
     ]);
-    test($csv->GetRow(0) === ['a' => 1, 'b' => 2, 'c' => 3]);
-    test($csv->GetRow(1) === ['a' => 4, 'b' => 5, 'c' => 6]);
+    test($csv->getRow(0) === ['a' => 1, 'b' => 2, 'c' => 3]);
+    test($csv->getRow(1) === ['a' => 4, 'b' => 5, 'c' => 6]);
 }
 
 function test_csv_get_column()
@@ -63,9 +63,9 @@ function test_csv_get_column()
         ['a' => 1, 'b' => 2, 'c' => 3],
         ['a' => 4, 'b' => 5, 'c' => 6]
     ]);
-    test($csv->GetColumn('a') === [1, 4]);
-    test($csv->GetColumn('b') === [2, 5]);
-    test($csv->GetColumn('c') === [3, 6]);
+    test($csv->getColumn('a') === [1, 4]);
+    test($csv->getColumn('b') === [2, 5]);
+    test($csv->getColumn('c') === [3, 6]);
 }
 
 function test_csv_add_row()
@@ -74,9 +74,9 @@ function test_csv_add_row()
     $csv = new \Mc\Csv([
         ['a' => 1, 'b' => 2, 'c' => 3]
     ]);
-    $csv->AddRow(['a' => 4, 'b' => 5, 'c' => 6]);
-    test($csv->TotalRows() === 2);
-    test($csv->GetRow(1) === ['a' => 4, 'b' => 5, 'c' => 6]);
+    $csv->addRow(['a' => 4, 'b' => 5, 'c' => 6]);
+    test($csv->totalRows() === 2);
+    test($csv->getRow(1) === ['a' => 4, 'b' => 5, 'c' => 6]);
 }
 
 function test_csv_add_column()
@@ -85,8 +85,8 @@ function test_csv_add_column()
     $csv = new \Mc\Csv([
         ['a' => 1, 'b' => 2, 'c' => 3]
     ]);
-    $csv->AddColumn('d', [4]);
-    test($csv->GetColumn('d') === [4]);
+    $csv->addColumn('d', [4]);
+    test($csv->getColumn('d') === [4]);
 }
 
 function test_csv_remove_row()
@@ -96,9 +96,9 @@ function test_csv_remove_row()
         ['a' => 1, 'b' => 2, 'c' => 3],
         ['a' => 4, 'b' => 5, 'c' => 6]
     ]);
-    $csv->RemoveRow(0);
-    test($csv->TotalRows() === 1);
-    test($csv->GetRow(0) === ['a' => 4, 'b' => 5, 'c' => 6]);
+    $csv->removeRow(0);
+    test($csv->totalRows() === 1);
+    test($csv->getRow(0) === ['a' => 4, 'b' => 5, 'c' => 6]);
 }
 
 function test_csv_remove_column()
@@ -107,9 +107,9 @@ function test_csv_remove_column()
     $csv = new \Mc\Csv([
         ['a' => 1, 'b' => 2, 'c' => 3]
     ]);
-    $csv->RemoveColumn('a');
-    test($csv->GetHeader() === ['b', 'c']);
-    test($csv->GetData() === [['b' => 2, 'c' => 3]]);
+    $csv->removeColumn('a');
+    test($csv->getHeader() === ['b', 'c']);
+    test($csv->getData() === [['b' => 2, 'c' => 3]]);
 }
 
 function test_csv_write()
@@ -119,7 +119,7 @@ function test_csv_write()
     $csv = new \Mc\Csv([
         ['a' => 1, 'b' => 2, 'c' => 3]
     ]);
-    $csv->Save($file);
+    $csv->save($file);
     test(file_exists($file));
 }
 
@@ -133,9 +133,9 @@ function test_csv_read()
 
     $file = __DIR__ . '/test.csv';
     $csv = new \Mc\Csv([]);
-    $csv->Load($file);
-    test($csv->GetHeader() === $header);
-    test($csv->GetData() === $data);
+    $csv->load($file);
+    test($csv->getHeader() === $header);
+    test($csv->getData() === $data);
 }
 
 function test_csv_load_from_string()
@@ -147,12 +147,12 @@ function test_csv_load_from_string()
     ];
 
     $csv = new \Mc\Csv([]);
-    $csv->LoadFromString(
+    $csv->loadFromString(
         "a;b;c" . PHP_EOL .
         "1;2;3" . PHP_EOL
     );
-    test($csv->GetHeader() === $header);
-    test($csv->GetData() === $data);
+    test($csv->getHeader() === $header);
+    test($csv->getData() === $data);
 }
 
 function test_csv_to_string()
@@ -162,7 +162,7 @@ function test_csv_to_string()
         ['a' => 1, 'b' => 2, 'c' => 3]
     ]);
     // attention: cells are quoted
-    test($csv->ToString() === '"a";"b";"c"' . PHP_EOL . '"1";"2";"3"' . PHP_EOL);
+    test($csv->toString() === '"a";"b";"c"' . PHP_EOL . '"1";"2";"3"' . PHP_EOL);
 }
 
 // Run the tests

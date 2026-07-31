@@ -30,59 +30,59 @@ class Csv
      * Returns the header of the CSV data
      * @return array
      */
-    public function GetHeader(): array;
+    public function getHeader(): array;
 
     /**
      * All data as array of arrays
      * @return array
      */
-    public function GetData(): array;
+    public function getData(): array;
 
     /**
      * Number of lines in the CSV
      * @return int
      */
-    public function TotalRows(): int;
+    public function totalRows(): int;
 
     /**
      * Number of columns in the CSV
      * @return int
      */
-    public function TotalColumns(): int;
+    public function totalColumns(): int;
 
     /**
      * Get row by index number
      * @param $index
      * @return array
      */
-    public function GetRow(int $index): array;
+    public function getRow(int $index): array;
 
     /**
      * Get column by column name
      * @param $columnName
      * @return array
      */
-    public function GetColumn(string $columnName): array;
+    public function getColumn(string $columnName): array;
     /**
      * @param $columnName
      * @param $index
-     * @return mixed cell value
+     * @return string cell value
      */
-    public function GetCell(string $columnName, int $index): string;
+    public function getCell(string $columnName, int $index): string;
 
     /**
      * Add a row to the CSV
      * @param array $row
      * @return int error code, 0 if no error
      */
-    public function AddRow(array $row): int;
+    public function addRow(array $row): int;
     /**
      * Add a column to the CSV
      * @param string $columnName
      * @param array $column
      * @return int error code, 0 if no error
      */
-    public function AddColumn(string $columnName, array $column): int;
+    public function addColumn(string $columnName, array $column): int;
 
     /**
      * Set a cell value
@@ -90,21 +90,21 @@ class Csv
      * @param int $index
      * @param string $value
      */
-    public function SetCellValue(string $columnName, int $index, string $value): void;
+    public function setCellValue(string $columnName, int $index, string $value): void;
 
     /**
      * Remove a row by index
      * @param int $index
      * @return int error code, 0 if no error
      */
-    public function RemoveRow(int $index): int;
+    public function removeRow(int $index): int;
 
     /**
      * Remove a column by name
      * @param string $columnName
      * @return int error code, 0 if no error
      */
-    public function RemoveColumn(string $columnName): int;
+    public function removeColumn(string $columnName): int;
 
     /**
      * Save CSV into file
@@ -114,7 +114,7 @@ class Csv
      * @param $quoteChar CSV quote character, default '"'
      * @return int error code, 0 if no error
      */
-    public function Save(
+    public function save(
         string $fileName,
         bool $hasHeader = true,
         string $separator = Csv::SEPARATOR,
@@ -129,7 +129,7 @@ class Csv
      * @param string $quoteChar default is '"'
      * @return int error code, 0 if no error
      */
-    public function Load(
+    public function load(
         string $fileName,
         bool $hasHeader = true,
         string $separator = Csv::SEPARATOR,
@@ -144,7 +144,7 @@ class Csv
      * @param string $quoteChar default is '"'
      * @return int error code, 0 if no error
      */
-    public function LoadFromString(
+    public function loadFromString(
         string $csvString,
         bool $hasHeader = true,
         string $separator = Csv::SEPARATOR,
@@ -158,7 +158,7 @@ class Csv
      * @param string $quoteChar default is '"'
      * @return string
      */
-    public function ToString(
+    public function toString(
         bool $hasHeader = true,
         string $separator = Csv::SEPARATOR,
         string $quoteChar = Csv::QUOTE_CHAR
@@ -170,7 +170,7 @@ class Csv
      * @param string $quoteChar default is double quote
      * @return string
      */
-    public static function Quote(string $value, string $quoteChar = Csv::QUOTE_CHAR): string;
+    public static function quote(string $value, string $quoteChar = Csv::QUOTE_CHAR): string;
 
     /**
      * Helper function, unquote a string with a quoteChar
@@ -178,7 +178,7 @@ class Csv
      * @param string $quoteChar default is double quote
      * @return string
      */
-    public static function Unquote(string $value, string $quoteChar = Csv::QUOTE_CHAR): string;
+    public static function unquote(string $value, string $quoteChar = Csv::QUOTE_CHAR): string;
 }
 ```
 
@@ -198,7 +198,7 @@ $csv = new Csv([
 ]);
 
 // Save CSV into file
-$csv->Save('data.csv');
+$csv->save('data.csv');
 ```
 
 Another example of CSV instance initialization.
@@ -214,7 +214,7 @@ $csv = new Csv([
 ]);
 
 // Save CSV into file
-$csv->Save('data.csv');
+$csv->save('data.csv');
 ```
 
 Load a CSV from a file.
@@ -225,13 +225,13 @@ use Mc\Csv;
 $csv = new Csv();
 
 // Load a CSV from a file
-$csv->Load('data.csv');
+$csv->load('data.csv');
 
 // Print the header
-print_r($csv->GetHeader());
+print_r($csv->getHeader());
 
 // Print the data
-print_r($csv->GetData());
+print_r($csv->getData());
 ```
 
 Load a CSV from a string.
@@ -242,7 +242,7 @@ use Mc\Csv;
 $csv = new Csv();
 
 // Load a CSV from a string
-$csv->LoadFromString(
+$csv->loadFromString(
     "id;name;age\n" .
     "1;John;25\n" .
     "2;Jane;22\n" .
