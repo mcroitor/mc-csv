@@ -1,0 +1,23 @@
+{
+    "name": "mcroitor/mc-csv",
+    "description": "A CSV library for handling CSV files in PHP.",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "Mihail Croitor",
+            "email": "mcroitor@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.3"
+    },
+    "require-dev": {
+
+    },
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Mc\\": "src/Mc"
+        }
+    }
+}

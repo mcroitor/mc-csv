@@ -1,6 +1,6 @@
 <?php
 
-include_once __DIR__ . '/../src/mc/csv.php';
+include_once __DIR__ . '/../src/Mc/Csv.php';
 
 
 function test(bool $expression, string $passed = "PASS", string $failed = "FAIL"): void {
