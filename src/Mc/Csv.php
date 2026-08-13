@@ -258,7 +258,7 @@ class Csv
             $this->data[] = \array_combine($this->header, $firstRow);
         }
 
-        while (($row = \fgetcsv($file, 0, $separator, $quoteChar)) !== false) {
+        while (($row = \fgetcsv($file, 0, $separator, $quoteChar, '')) !== false) {
             $this->data[] = \array_combine($this->header, $row);
         }
         \fclose($file);
