@@ -250,7 +250,7 @@ class Csv
         }
         $this->data = [];
 
-        $firstRow = \fgetcsv($file, 0, $separator, $quoteChar);
+        $firstRow = \fgetcsv($file, 0, $separator, $quoteChar, '');
         if ($hasHeader) {
             $this->header = $firstRow;
         } else {
